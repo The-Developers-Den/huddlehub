@@ -10,7 +10,7 @@ const WalletConnect = ({ connector, id }) => {
     "https://studio.apereunion.xyz/walletconnect.png",
   ];
   return (
-    <section className="bg-[#13141D] border border-[#414141] w-[60%] mx-auto m-2 my-3 flex  rounded-xl hover:scale-95 hover:bg-[#24252d] cursor-pointer h-16 justify-start transition duration-300">
+    <section className="bg-[#13141D] border border-[#414141] w-[60%] mx-auto m-2 my-3 flex  rounded-xl hover:scale-[.98] hover:bg-[#24252d] cursor-pointer h-16 justify-start transition duration-300">
       <Image
         src={img[id]}
         width="140"
