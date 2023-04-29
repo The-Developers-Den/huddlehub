@@ -83,15 +83,15 @@ const Home = () => {
         <AddressBar />
         <h2 className="text-3xl mx-3 font-medium">Home</h2>
         <h3 className="mx-3 text-base text-[#8F8F8F] ">
-          Get your latest posts, manage your finance.
+          Get your latest posts, share with world.
         </h3>
         <section className="flex my-2">
-          <div className="basis-[72%] px-3">
+          <div className="basis-[70%] px-5">
             <PostInput />
             {/* {!posts && <h2>No Home</h2>} */}
             {/* {posts && posts.map((post, id) => <PostCard {...post} key={id} />)} */}
           </div>
-          <div className="basis-[28%] px-3">
+          <div className="basis-[30%] px-3">
             <h2 className="text-base font-medium">Suggested Subscribers</h2>
             {/* {sub.map((item, id) => (
               <SuggestedSubscribers {...item} key={id} /> */}

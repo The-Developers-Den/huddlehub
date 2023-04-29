@@ -49,8 +49,8 @@ const ProfileCard = ({ name, handle, img }) => {
       </div>
       <button className="my-auto basis-[5%]" onClick={handleClick}>
         <svg
-          width="15"
-          height="15"
+          width="17"
+          height="17"
           viewBox="0 0 15 15"
           className="text-[#98A2B3]"
           fill="none"
