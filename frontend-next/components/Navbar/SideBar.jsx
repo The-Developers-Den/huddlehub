@@ -9,12 +9,14 @@ const SideBar = () => {
     <div className="flex flex-col justify-between font-inter h-[100vh] bg-[#13141D] py-3 px-4">
       <section className="">
         <section>
-          <h2 className="my-5 mx-auto text-lg font-[530]">HuddleHub</h2>
+          <h2 className="my-5 mx-auto text-xl font-[590] font-worksans">
+            HuddleHub
+          </h2>
         </section>
-        <div className="flex border rounded-xl mb-5 h-8">
+        <div className="flex border rounded-xl mb-5 h-fit ">
           <svg
-            width="16"
-            height="16"
+            width="20"
+            height="20"
             viewBox="0 0 15 15"
             fill="none"
             className="my-auto mx-1"
@@ -29,21 +31,21 @@ const SideBar = () => {
           </svg>
           <input
             placeholder="Search"
-            className="w-[90%] border-none decoration-none outline-none bg-[#13141D] text-white rounded-xl  "
+            className="w-[90%] border-none decoration-none py-2 outline-none bg-[#13141D] text-white rounded-xl  "
           />
         </div>
         <Link
           href="/home"
           className={`${
             router.pathname === "/home" && "text-[#FD5B74]"
-          } flex justify-start my-2`}
+          } flex justify-start my-3 text-base`}
         >
           <svg
-            width="16"
-            height="16"
+            width="21"
+            height="21"
             viewBox="0 0 15 15"
             fill="none"
-            className="mr-2 my-auto"
+            className="mr-3 my-auto"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
@@ -59,13 +61,13 @@ const SideBar = () => {
           href="/discover"
           className={`${
             router.pathname === "/discover" && "text-[#FD5B74]"
-          } flex justify-start my-2`}
+          } flex justify-start my-3 text-base`}
         >
           <svg
-            width="16"
-            height="16"
+            width="21"
+            height="21"
             viewBox="0 0 15 15"
-            className="mr-2 my-auto"
+            className="mr-3 my-auto"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -82,12 +84,12 @@ const SideBar = () => {
           href="/profile"
           className={`${
             router.pathname === "/profile" && "text-[#FD5B74]"
-          } flex justify-start my-2`}
+          } flex justify-start my-3 text-base`}
         >
           <svg
-            width="16"
-            height="16"
-            className="mr-2 my-auto"
+            width="21"
+            height="21"
+            className="mr-3 my-auto"
             viewBox="0 0 15 15"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -103,41 +105,36 @@ const SideBar = () => {
         </Link>
 
         <Link
-          href="/quest"
+          href="/connect"
           className={`${
-            router.pathname === "/quest" && "text-[#FD5B74]"
-          } flex justify-start my-2`}
+            router.pathname === "/connect" && "text-[#FD5B74]"
+          } flex justify-start my-3 text-base`}
         >
           <svg
-            width="16"
-            height="16"
+            width="21"
+            height="21"
+            className="mr-3 my-auto"
             viewBox="0 0 15 15"
-            className="mr-2 my-auto"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d="M13.9 0.499976C13.9 0.279062 13.7209 0.0999756 13.5 0.0999756C13.2791 0.0999756 13.1 0.279062 13.1 0.499976V1.09998H12.5C12.2791 1.09998 12.1 1.27906 12.1 1.49998C12.1 1.72089 12.2791 1.89998 12.5 1.89998H13.1V2.49998C13.1 2.72089 13.2791 2.89998 13.5 2.89998C13.7209 2.89998 13.9 2.72089 13.9 2.49998V1.89998H14.5C14.7209 1.89998 14.9 1.72089 14.9 1.49998C14.9 1.27906 14.7209 1.09998 14.5 1.09998H13.9V0.499976ZM11.8536 3.14642C12.0488 3.34168 12.0488 3.65826 11.8536 3.85353L10.8536 4.85353C10.6583 5.04879 10.3417 5.04879 10.1465 4.85353C9.9512 4.65827 9.9512 4.34169 10.1465 4.14642L11.1464 3.14643C11.3417 2.95116 11.6583 2.95116 11.8536 3.14642ZM9.85357 5.14642C10.0488 5.34168 10.0488 5.65827 9.85357 5.85353L2.85355 12.8535C2.65829 13.0488 2.34171 13.0488 2.14645 12.8535C1.95118 12.6583 1.95118 12.3417 2.14645 12.1464L9.14646 5.14642C9.34172 4.95116 9.65831 4.95116 9.85357 5.14642ZM13.5 5.09998C13.7209 5.09998 13.9 5.27906 13.9 5.49998V6.09998H14.5C14.7209 6.09998 14.9 6.27906 14.9 6.49998C14.9 6.72089 14.7209 6.89998 14.5 6.89998H13.9V7.49998C13.9 7.72089 13.7209 7.89998 13.5 7.89998C13.2791 7.89998 13.1 7.72089 13.1 7.49998V6.89998H12.5C12.2791 6.89998 12.1 6.72089 12.1 6.49998C12.1 6.27906 12.2791 6.09998 12.5 6.09998H13.1V5.49998C13.1 5.27906 13.2791 5.09998 13.5 5.09998ZM8.90002 0.499976C8.90002 0.279062 8.72093 0.0999756 8.50002 0.0999756C8.2791 0.0999756 8.10002 0.279062 8.10002 0.499976V1.09998H7.50002C7.2791 1.09998 7.10002 1.27906 7.10002 1.49998C7.10002 1.72089 7.2791 1.89998 7.50002 1.89998H8.10002V2.49998C8.10002 2.72089 8.2791 2.89998 8.50002 2.89998C8.72093 2.89998 8.90002 2.72089 8.90002 2.49998V1.89998H9.50002C9.72093 1.89998 9.90002 1.72089 9.90002 1.49998C9.90002 1.27906 9.72093 1.09998 9.50002 1.09998H8.90002V0.499976Z"
+              d="M10.6788 2.95419C10.0435 2.53694 9.18829 2.54594 8.51194 3.00541C8.35757 3.11027 8.1921 3.27257 7.7651 3.69957L7.14638 4.31829C6.95112 4.51355 6.63454 4.51355 6.43928 4.31829C6.24401 4.12303 6.24401 3.80645 6.43928 3.61119L7.058 2.99247C7.0725 2.97797 7.08679 2.96366 7.1009 2.94955C7.47044 2.57991 7.70691 2.34336 7.95001 2.17822C8.94398 1.50299 10.2377 1.46813 11.2277 2.11832C11.4692 2.27689 11.7002 2.508 12.0515 2.85942C12.0662 2.8741 12.081 2.88898 12.0961 2.90408C12.1112 2.91917 12.1261 2.93405 12.1408 2.94871C12.4922 3.30001 12.7233 3.53102 12.8819 3.77248C13.5321 4.76252 13.4972 6.05623 12.822 7.0502C12.6568 7.2933 12.4203 7.52976 12.0507 7.89929C12.0366 7.9134 12.0222 7.92771 12.0077 7.94221L11.389 8.56093C11.1938 8.7562 10.8772 8.7562 10.6819 8.56093C10.4867 8.36567 10.4867 8.04909 10.6819 7.85383L11.3006 7.23511C11.7276 6.80811 11.8899 6.64264 11.9948 6.48827C12.4543 5.81192 12.4633 4.95675 12.046 4.32141C11.9513 4.17714 11.8009 4.02307 11.389 3.61119C10.9771 3.1993 10.8231 3.04893 10.6788 2.95419ZM4.31796 6.43961C4.51322 6.63487 4.51322 6.95146 4.31796 7.14672L3.69924 7.76544C3.27224 8.19244 3.10993 8.35791 3.00507 8.51227C2.54561 9.18863 2.53661 10.0438 2.95385 10.6791C3.0486 10.8234 3.19896 10.9775 3.61085 11.3894C4.02274 11.8012 4.17681 11.9516 4.32107 12.0464C4.95642 12.4636 5.81158 12.4546 6.48794 11.9951C6.6423 11.8903 6.80777 11.728 7.23477 11.301L7.85349 10.6823C8.04875 10.487 8.36533 10.487 8.5606 10.6823C8.75586 10.8775 8.75586 11.1941 8.5606 11.3894L7.94188 12.0081C7.92738 12.0226 7.91307 12.0369 7.89897 12.051C7.52943 12.4206 7.29296 12.6572 7.04986 12.8223C6.05589 13.4976 4.76219 13.5324 3.77214 12.8822C3.53068 12.7237 3.29967 12.4925 2.94837 12.1411C2.93371 12.1264 2.91883 12.1116 2.90374 12.0965C2.88865 12.0814 2.87377 12.0665 2.8591 12.0518C2.50766 11.7005 2.27656 11.4695 2.11799 11.2281C1.4678 10.238 1.50265 8.94432 2.17788 7.95035C2.34303 7.70724 2.57957 7.47077 2.94922 7.10124C2.96333 7.08713 2.97763 7.07283 2.99213 7.05833L3.61085 6.43961C3.80611 6.24435 4.12269 6.24435 4.31796 6.43961Z"
               fill="currentColor"
               fill-rule="evenodd"
               clip-rule="evenodd"
             ></path>
           </svg>
-          <label className="cursor-pointer">Quest</label>
+          <label className="cursor-pointer">Connect</label>
         </Link>
       </section>
       <section className="flex flex-col">
-        <Link
-          href="/support"
-          className={`${
-            router.pathname === "/support" && "text-[#FD5B74]"
-          } flex justify-start`}
-        >
+        <Link href="/home" className="flex justify-start  text-base">
           <svg
-            width="16"
-            height="16"
+            width="21"
+            height="21"
             viewBox="0 0 15 15"
-            className="mr-2 my-auto"
+            className="mr-3 my-auto"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -151,16 +148,14 @@ const SideBar = () => {
           <label className="cursor-pointer">Support</label>
         </Link>
         <Link
-          href="/settings"
-          className={`${
-            router.pathname === "/settings" && "text-[#FD5B74]"
-          } flex justify-start my-2 cursor-pointer  border-b pb-2  border-b-white `}
+          href="/home"
+          className="flex justify-start my-2 text-base cursor-pointer  border-b pb-2  border-b-white"
         >
           <svg
-            width="16"
-            height="16"
+            width="21"
+            height="21"
             viewBox="0 0 15 15"
-            className="mr-2 my-auto"
+            className="mr-3 my-auto"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
