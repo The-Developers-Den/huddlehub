@@ -6,7 +6,7 @@ import PostInput from "@/components/Card/PostInput";
 import PostCard from "@/components/Card/PostCard";
 import { useAccount } from "wagmi";
 
-const Posts = () => {
+const Home = () => {
   const { address } = useAccount();
   const sub = [
     {
@@ -76,19 +76,19 @@ const Posts = () => {
   //   }, [address, accessToken, primaryProfile]);
   return (
     <div className="flex font-inter ">
-      <div className="fixed w-[16vw]">
+      <div className="fixed w-[18vw]">
         <SideBar />
       </div>
-      <div className="basis-[84%] w-[84vw] ml-[16vw] bg-[#070B13] min-h-[100vh]">
+      <div className="basis-[82%] w-[82vw] ml-[18vw] bg-[#070B13] min-h-[100vh]">
         <AddressBar />
-        <h2 className="text-3xl mx-3 font-medium">Posts</h2>
+        <h2 className="text-3xl mx-3 font-medium">Home</h2>
         <h3 className="mx-3 text-base text-[#8F8F8F] ">
           Get your latest posts, manage your finance.
         </h3>
         <section className="flex my-2">
           <div className="basis-[72%] px-3">
             <PostInput />
-            {/* {!posts && <h2>No Posts</h2>} */}
+            {/* {!posts && <h2>No Home</h2>} */}
             {/* {posts && posts.map((post, id) => <PostCard {...post} key={id} />)} */}
           </div>
           <div className="basis-[28%] px-3">
@@ -107,4 +107,4 @@ const Posts = () => {
   );
 };
 
-export default Posts;
+export default Home;

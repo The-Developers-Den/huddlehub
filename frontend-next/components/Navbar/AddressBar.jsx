@@ -5,7 +5,7 @@ import Link from "next/link";
 const AddressBar = () => {
   const { address } = useAccount();
   return (
-    <nav className="flex justify-end w-full px-5 py-2 h-16 bg-[#070B13] font-inter">
+    <nav className="flex justify-end w-full px-5 py-2 my-2 h-16 bg-[#070B13] font-inter">
       <section className="relative my-auto mx-4">
         <svg
           width="18"
