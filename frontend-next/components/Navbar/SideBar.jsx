@@ -13,7 +13,7 @@ const SideBar = () => {
             HuddleHub
           </h2>
         </section>
-        <div className="flex border rounded-xl mb-5 h-fit ">
+        <div className="flex border rounded-xl mb-5 h-fit  ">
           <svg
             width="20"
             height="20"
@@ -38,7 +38,7 @@ const SideBar = () => {
           href="/home"
           className={`${
             router.pathname === "/home" && "text-[#FD5B74]"
-          } flex justify-start my-3 text-base`}
+          } flex justify-start my-3 text-base text-[#8F8F8F] hover:text-white transition duration-300`}
         >
           <svg
             width="21"
@@ -61,7 +61,7 @@ const SideBar = () => {
           href="/discover"
           className={`${
             router.pathname === "/discover" && "text-[#FD5B74]"
-          } flex justify-start my-3 text-base`}
+          } flex justify-start my-3 text-base text-[#8F8F8F] hover:text-white transition duration-300`}
         >
           <svg
             width="21"
@@ -84,7 +84,7 @@ const SideBar = () => {
           href="/profile"
           className={`${
             router.pathname === "/profile" && "text-[#FD5B74]"
-          } flex justify-start my-3 text-base`}
+          } flex justify-start my-3 text-base text-[#8F8F8F] hover:text-white transition duration-300`}
         >
           <svg
             width="21"
@@ -108,7 +108,7 @@ const SideBar = () => {
           href="/connect"
           className={`${
             router.pathname === "/connect" && "text-[#FD5B74]"
-          } flex justify-start my-3 text-base`}
+          } flex justify-start my-3 text-base text-[#8F8F8F] hover:text-white transition duration-300`}
         >
           <svg
             width="21"
@@ -129,7 +129,10 @@ const SideBar = () => {
         </Link>
       </section>
       <section className="flex flex-col">
-        <Link href="/home" className="flex justify-start  text-base">
+        <Link
+          href="/home"
+          className="flex justify-start text-base text-[#8F8F8F] hover:text-white transition duration-300"
+        >
           <svg
             width="21"
             height="21"
@@ -149,7 +152,7 @@ const SideBar = () => {
         </Link>
         <Link
           href="/home"
-          className="flex justify-start my-2 text-base cursor-pointer  border-b pb-2  border-b-white"
+          className="flex justify-start my-3 text-base cursor-pointer  border-b pb-4  border-b-white text-[#8F8F8F] hover:text-white transition duration-300"
         >
           <svg
             width="21"

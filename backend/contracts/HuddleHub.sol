@@ -5,6 +5,7 @@ contract Huddle1 {
         uint id;
         string username;
         address account;
+        string metadata;
     }
     
     struct Post {
@@ -20,14 +21,14 @@ contract Huddle1 {
     uint nextUserId = 0;
     uint nextPostId = 0;
 
-    event UserCreated(uint id, string username, address account);
+    event UserCreated(uint id, string username, address account, string metadata);
     event PostCreated(uint id, address owner,string content, uint created);
 
-     function createUser(string memory name) public {
+     function createUser(string memory name,string memory metadata) public {
         uint id = nextUserId;
-        users[id] = User(id, name, msg.sender);
+        users[id] = User(id, name, msg.sender, metadata);
         nextUserId += 1;
-        emit UserCreated(id, name, msg.sender);
+        emit UserCreated(id, name, msg.sender, metadata);
     }
 
     function createPost(string memory content) public  {
