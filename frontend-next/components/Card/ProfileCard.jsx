@@ -11,7 +11,7 @@ const ProfileCard = ({ name, handle, img }) => {
   };
 
   return (
-    <div className="flex my-3 justify-between font-inter">
+    <div className="flex my-2 justify-between font-inter">
       <div className="flex basis-[95%]">
         <Image
           src={
@@ -19,19 +19,19 @@ const ProfileCard = ({ name, handle, img }) => {
             // primaryProfile?.metadataInfo?.avatar ||
             "/assets/default-user.jpg"
           }
-          width="120"
-          height="120"
+          width="150"
+          height="150"
           alt="profile-pic"
-          className="rounded-full my-auto basis-[25%] w-10 h-10 "
+          className="rounded-full my-auto basis-[28%] w-10 h-12 "
         />
-        <section className="mx-2 basis-[73%]">
+        <section className="mx-2 basis-[67%] my-auto">
           <h2 className="text-sm">
             {
               // primaryProfile?.metadataInfo?.displayName ||
               "John Doe"
             }
           </h2>
-          <h2 className="text-[0.6rem] text-[#F2F4F7]">
+          <h2 className="text-xs text-[#8F8F8F]">
             @test
             {/* {
             primaryProfile?.handle
