@@ -1,15 +1,15 @@
 import { useState } from "react";
 import React from "react";
-// import CreateProfile from "../Buttons/CreateProfile";
+import { useAccount } from "wagmi";
+import CreateProfile from "../Buttons/CreateProfile";
 
 const SignupForm = () => {
+  const { address } = useAccount();
   const [signupInput, setSignupInput] = useState({
     handle: "",
-    displayName: "",
-    bio: "",
-    bannerImg: "",
-    avatar: "",
-    operator: "",
+    userName: "",
+    profilePic: "",
+    address: address,
   });
 
   const handleOnChange = (event) => {
@@ -22,59 +22,43 @@ const SignupForm = () => {
   };
 
   return (
-    <div className="flex flex-col h-fit justify-center my-auto rounded-lg w-[80%] h-full mx-auto bg-[#13141D] px-7 py-5 border-[#414141] border">
-      <section className="flex flex-col  my-1">
-        <label className="text-base my-2 ">Handle (w/o @) </label>
-        <input
-          className="bg-[#070B13] my-1 rounded-lg border-none py-2 outline-none px-3 text-sm "
-          name="handle"
-          placeholder="Enter handle"
-          value={signupInput.handle}
-          onChange={handleOnChange}
-        />
-      </section>
-      <div className="flex flex-col my-1">
-        <label className="text-base my-2 ">Avatar URL</label>
-        <input
-          name="avatar"
-          className="bg-[#070B13] my-1 rounded-lg border-none py-2 outline-none px-3 text-sm"
-          value={signupInput.avatar}
-          onChange={handleOnChange}
-          placeholder="Enter avatar URL"
-        />
-      </div>
-      <div className="flex flex-col my-1">
-        <label className="text-base my-2">Name</label>
-        <input
-          className="bg-[#070B13] my-1 rounded-lg border-none py-2 outline-none px-3 text-sm"
-          name="displayName"
-          value={signupInput.displayName}
-          onChange={handleOnChange}
-          placeholder="Enter name"
-        />
-      </div>
-      <div className="flex flex-col my-1">
-        <label className="text-base my-2 ">Bio</label>
-        <input
-          className="bg-[#070B13] my-1 rounded-lg border-none py-2 outline-none px-3 text-sm"
-          name="bio"
-          value={signupInput.bio}
-          onChange={handleOnChange}
-          placeholder="Enter Bio"
-        />
-      </div>
-      <div className="flex flex-col my-1">
-        <label className="text-base  my-2 ">Operator address (optional)</label>
-        <input
-          className="bg-[#070B13] my-1 rounded-lg border-none py-2 outline-none px-3 text-sm "
-          name="operator"
-          value={signupInput.operator}
-          onChange={handleOnChange}
-          placeholder="Enter operator address"
-        />
-      </div>
+    <div className="flex flex-col h-full rounded-xl w-full bg-[#13141D] p-7 border-[#414141] border text-start justify-center ">
+      <label className="text-base my-2 mt-3 ">Handle</label>
+      <input
+        className="bg-[#070B13] my-1 rounded-lg border-none p-3 w-[85%] outline-none text-sm "
+        name="handle"
+        placeholder="johndoe"
+        value={signupInput.handle}
+        onChange={handleOnChange}
+      />
 
-      {/* <CreateProfile {...signupInput} /> */}
+      <label className="text-base my-2 mt-4">UserName</label>
+      <input
+        className="bg-[#070B13] my-1 rounded-lg border-none p-3 w-[85%] outline-none text-sm"
+        name="userName"
+        value={signupInput.userName}
+        onChange={handleOnChange}
+        placeholder="John Doe"
+      />
+
+      <label className="text-base my-2 mt-4">Profile Image</label>
+      <input
+        name="profilePic"
+        className="bg-[#070B13] my-1 rounded-lg border-none p-3 w-[85%] outline-none text-sm"
+        value={signupInput.avatar}
+        onChange={handleOnChange}
+        placeholder="Enter avatar URL"
+      />
+
+      <label className="text-base  my-2 mt-4">Address</label>
+      <input
+        className="bg-[#070B13] my-1 rounded-lg  border-none p-3 outline-none w-[85%] text-sm "
+        name="address"
+        disabled={true}
+        placeholder={signupInput.address}
+      />
+
+      <CreateProfile {...signupInput} />
     </div>
   );
 };
