@@ -1,14 +1,19 @@
 import React from "react";
 import { useEventListener } from "@huddle01/react";
-import { Video, Audio } from "@huddle01/react/components";
 import { FiMic, FiMicOff, FiVideo, FiVideoOff } from "react-icons/fi";
-import { useLobby, useAudio, useVideo, useRoom } from "@huddle01/react/hooks";
+import {
+  useLobby,
+  useAudio,
+  useVideo,
+  useRoom,
+  usePeers,
+} from "@huddle01/react/hooks";
 import { useDisplayName } from "@huddle01/react/app-utils";
 import { RxCross2 } from "react-icons/rx";
 
-const LobbyCard = ({ handleClose, roomId }) => {
+const LobbyCard = ({ handleClose, roomId, videoRef }) => {
+  const { peers } = usePeers();
   const [displayNameText, setDisplayNameText] = React.useState("Guest");
-  const videoRef = React.useRef(null);
   const { joinRoom, leaveRoom, isRoomJoined, error } = useRoom();
   const { setDisplayName, error: displayNameError } = useDisplayName();
 
@@ -38,7 +43,12 @@ const LobbyCard = ({ handleClose, roomId }) => {
     if (videoStream && videoRef.current)
       videoRef.current.srcObject = videoStream;
   });
-
+  useEventListener("room:joined", () => {
+    handleClose();
+  });
+  React.useEffect(() => {
+    isRoomJoined && handleClose();
+  }, []);
   return (
     <div className="bg-[#13141D] rounded-lg mx-auto w-[50%] h-fit px-5 py-3 font-worksans text-center relative ">
       <RxCross2
@@ -148,6 +158,8 @@ const LobbyCard = ({ handleClose, roomId }) => {
           </div>
         )
       )}
+
+      {console.log(peers)}
     </div>
   );
 };

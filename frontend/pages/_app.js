@@ -1,6 +1,5 @@
 import "@/styles/globals.css";
 import React from "react";
-import { useHuddle01 } from "@huddle01/react";
 import Image from "next/image";
 import { WagmiConfig, createClient, configureChains } from "wagmi";
 import { filecoin, filecoinHyperspace } from "wagmi/chains";
@@ -47,10 +46,7 @@ const client = createClient({
 });
 
 export default function App({ Component, pageProps }) {
-  const { initialize, isInitialized } = useHuddle01();
-  React.useEffect(() => {
-    initialize(process.env.NEXT_PUBLIC_HUDDLE_PROJECT_ID);
-  }, []);
+  
   const [ready, setReady] = React.useState(false);
   React.useEffect(() => {
     setReady(true);
