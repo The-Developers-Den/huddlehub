@@ -68,7 +68,7 @@ const Discover = () => {
         <div>
           {showAll && (
             <div className="grid grid-cols-4 gap-5 p-5">
-              <MeetCard />
+              <MeetCard roomId={"jby-qqjp-ezf"} />
             </div>
           )}
           {showFree && (

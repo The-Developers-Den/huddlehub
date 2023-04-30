@@ -50,7 +50,7 @@ const SignupForm = () => {
         placeholder="Enter avatar URL"
       />
 
-      <label className="text-base  my-2 mt-4">Address</label>
+      <label className="text-base my-2 mt-4">Address</label>
       <input
         className="bg-[#070B13] my-1 rounded-lg  border-none p-3 outline-none w-[85%] text-sm "
         name="address"
