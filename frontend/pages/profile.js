@@ -1,13 +1,19 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import SideBar from "@/components/Navbar/SideBar";
 import AddressBar from "@/components/Navbar/AddressBar";
-import SuggestedSubscribers from "@/components/Card/SuggestedSubscribers";
-import PostInput from "@/components/Card/PostInput";
+import MyProfile from "@/components/Card/MyProfile";
 import PostCard from "@/components/Card/PostCard";
-import { useAccount } from "wagmi";
+import MeetCard from "@/components/Card/MeetCard";
+import SuggestedSubscribers from "@/components/Card/SuggestedSubscribers";
+import Modal from "@mui/material/Modal";
+import CreateMeetForm from "@/components/Forms/CreateMeet";
 
-const Home = () => {
-  const { address } = useAccount();
+const Profile = () => {
+  const [showPosts, setShowPosts] = useState(true);
+  const [showMeet, setShowMeet] = useState(false);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const sub = [
     {
       handle: "marry",
@@ -37,30 +43,7 @@ const Home = () => {
     commentCount: "20",
     likedStatus: "",
   };
-  //   useEffect(() => {
-  //     if (!(accessToken && primaryProfile)) {
-  //       return;
-  //     }
-  //     const fetch = async () => {
-  //       try {
-  //         const res = await getPrimaryProfilePosts({
-  //           variables: {
-  //             address: address,
-  //           },
-  //         });
-  //         var allPosts: any = [];
-  //         const posts1 = res?.data?.address?.wallet?.primaryProfile?.posts?.edges;
 
-  //         posts1.map((post: { node: any }) => {
-  //           allPosts.push({ ...post.node, comments: post.node.comments.edges });
-  //         });
-  //         setPosts(allPosts);
-  //       } catch (error) {
-  //         console.error(error);
-  //       }
-  //     };
-  //     fetch();
-  //   }, [address, accessToken, primaryProfile]);
   return (
     <div className="flex font-inter ">
       <div className="fixed w-[18vw]">
@@ -68,15 +51,27 @@ const Home = () => {
       </div>
       <div className="basis-[82%] w-[82vw] ml-[18vw] bg-[#070B13] min-h-[100vh]">
         <AddressBar />
-        <h2 className="text-3xl mx-3 font-medium">Home</h2>
-        <h3 className="mx-3 text-base text-[#8F8F8F] ">
-          Get your latest posts, share with world.
-        </h3>
         <section className="flex my-2">
-          <div className="basis-[70%] px-5 h-[80vh] overflow-y-scroll">
-            <PostInput />
+          <div className="basis-[70%] px-5 ">
+            <MyProfile
+              showPosts={showPosts}
+              showMeet={showMeet}
+              setShowMeet={setShowMeet}
+              setShowPosts={setShowPosts}
+              handleOpen={handleOpen}
+            />
+            {showPosts && (
+              <div>
+                <PostCard {...post} />
+              </div>
+            )}
+            {showMeet && (
+              <div className="px-5 grid grid-cols-2 gap-5 ">
+                <MeetCard />
+                <MeetCard />
+              </div>
+            )}
             {/* {!posts && <h2>No Posts</h2>} */}
-            <PostCard {...post} />
             {/* {posts && posts.map((post, id) => <PostCard {...post} key={id} />)} */}
           </div>
           <div className="basis-[30%] px-3">
@@ -93,8 +88,17 @@ const Home = () => {
           </div>
         </section>
       </div>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        className="overflow-y-scroll z-20 py-7"
+      >
+        <CreateMeetForm handleClose={handleClose} />
+      </Modal>
     </div>
   );
 };
 
-export default Home;
+export default Profile;

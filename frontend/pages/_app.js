@@ -3,6 +3,8 @@ import React from "react";
 import Image from "next/image";
 import { WagmiConfig, createClient, configureChains } from "wagmi";
 import { filecoin, filecoinHyperspace } from "wagmi/chains";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
@@ -52,6 +54,18 @@ export default function App({ Component, pageProps }) {
     <>
       {ready ? (
         <WagmiConfig client={client}>
+          <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+          />
           <Component {...pageProps} />
         </WagmiConfig>
       ) : (
@@ -61,7 +75,7 @@ export default function App({ Component, pageProps }) {
             width="200"
             height="200"
             alt="loading"
-            className="animate-spin w-28 h-28 my-auto"
+            className="animate-spin w-16 h-16 my-auto"
           />
         </div>
       )}

@@ -1,7 +1,6 @@
 import WalletConnect from "@/components/Buttons/WalletConnect";
-import { useAccount, useConnect, useDisconnect } from "wagmi";
+import {useConnect, } from "wagmi";
 import ConnectWallet from "@/components/Panels/WalletPanel";
-import UserForm from "@/components/Forms/CreateUser";
 
 const Walletconnect = () => {
   const { connectors } = useConnect();

@@ -38,7 +38,7 @@ const SideBar = () => {
           href="/home"
           className={`${
             router.pathname === "/home" && "text-[#FD5B74]"
-          } flex justify-start my-3 text-base text-[#8F8F8F] hover:text-white transition duration-300`}
+          } flex justify-start my-3 text-base  hover:text-[#8f8f8f] transition duration-300`}
         >
           <svg
             width="21"
@@ -61,7 +61,7 @@ const SideBar = () => {
           href="/discover"
           className={`${
             router.pathname === "/discover" && "text-[#FD5B74]"
-          } flex justify-start my-3 text-base text-[#8F8F8F] hover:text-white transition duration-300`}
+          } flex justify-start my-3 text-base  hover:text-[#8f8f8f] transition duration-300`}
         >
           <svg
             width="21"
@@ -84,7 +84,7 @@ const SideBar = () => {
           href="/profile"
           className={`${
             router.pathname === "/profile" && "text-[#FD5B74]"
-          } flex justify-start my-3 text-base text-[#8F8F8F] hover:text-white transition duration-300`}
+          } flex justify-start my-3 text-base hover:text-[#8f8f8f] transition duration-300`}
         >
           <svg
             width="21"
@@ -108,7 +108,7 @@ const SideBar = () => {
           href="/connect"
           className={`${
             router.pathname === "/connect" && "text-[#FD5B74]"
-          } flex justify-start my-3 text-base text-[#8F8F8F] hover:text-white transition duration-300`}
+          } flex justify-start my-3 text-base hover:text-[#8f8f8f] transition duration-300`}
         >
           <svg
             width="21"
@@ -131,7 +131,7 @@ const SideBar = () => {
       <section className="flex flex-col">
         <Link
           href="/home"
-          className="flex justify-start text-base text-[#8F8F8F] hover:text-white transition duration-300"
+          className="flex justify-start text-base hover:text-[#8f8f8f] transition duration-300"
         >
           <svg
             width="21"
@@ -152,7 +152,7 @@ const SideBar = () => {
         </Link>
         <Link
           href="/home"
-          className="flex justify-start my-3 text-base cursor-pointer  border-b pb-4  border-b-white text-[#8F8F8F] hover:text-white transition duration-300"
+          className="flex justify-start my-3 text-base cursor-pointer  border-b pb-4  border-b-white text-[#f2f2f2] hover:text-[#8f8f8f] transition duration-300"
         >
           <svg
             width="21"

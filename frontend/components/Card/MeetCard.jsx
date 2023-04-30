@@ -1,9 +1,10 @@
 import React from "react";
 import Image from "next/image";
+import { BsFillCircleFill } from "react-icons/bs";
 
 const MeetCard = ({ roomId, image }) => {
   return (
-    <div className="flex flex-col hover:scale-[.98] ease-in-out duration-300  min-h-fit min-w-fit  rounded-lg  bg-[#13141D] shadow-sm border border-[#414141] ">
+    <div className="flex flex-col relative hover:scale-[.98] ease-in-out duration-300  min-h-fit min-w-fit  rounded-lg  bg-[#13141D] shadow-sm border border-[#414141] ">
       <Image
         src={
           image ||
@@ -25,6 +26,10 @@ const MeetCard = ({ roomId, image }) => {
           Web Masters
         </h2>
       </div>
+      <section className="absolute top-0 right-0 bg-[#13141dc4] rounded-lg flex p-1 m-1 text-xs px-2">
+        <BsFillCircleFill className="my-auto text-[#ff4524] " size={"11px"} />
+        <h2 className="my-auto mx-1">Live</h2>
+      </section>
     </div>
   );
 };
