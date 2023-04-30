@@ -14,7 +14,7 @@ const useWeb3Storage = () => {
     try {
       const client = makeStorageClient();
       const cid = await client.put([file]);
-      return `https://${cid}.ipfs.w3s.link/${file.name}`;
+      return cid;
     } catch (err) {
       console.error(err);
     }

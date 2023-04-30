@@ -1,5 +1,5 @@
 {
-  "address": "0xB16442cc83A83289370780680495a87213B73f36",
+  "address": "0x699033d6bdfeE5E1ac5a3279A35084FE7Bf710a1",
   "abi": [
     {
       "anonymous": false,
@@ -52,6 +52,12 @@
           "internalType": "address",
           "name": "account",
           "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "metadata",
+          "type": "string"
         }
       ],
       "name": "UserCreated",
@@ -75,6 +81,11 @@
         {
           "internalType": "string",
           "name": "name",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "metadata",
           "type": "string"
         }
       ],

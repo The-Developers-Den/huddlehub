@@ -1,9 +1,16 @@
 import { useAccount, useContract, useSignMessage, useSigner } from "wagmi";
 import HuddleContract from "@/abi/HuddleHubContract.json";
+import useWeb3Storage from "@/hooks/useWeb3Sorage";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
+import { useNetwork } from "wagmi";
 
-const CreateProfile = ({ handle, userName, profilePic }) => {
+const CreateProfile = ({ handle, userName, profilePic, bio }) => {
   const { address } = useAccount();
+  const { chain } = useNetwork();
   const { data: signer } = useSigner();
+  const router = useRouter();
+  const { storeFile } = useWeb3Storage();
 
   const contract = useContract({
     address: HuddleContract.address,
@@ -12,15 +19,45 @@ const CreateProfile = ({ handle, userName, profilePic }) => {
   });
 
   const handleOnClick = async () => {
-    const profileName = userName;
-    const profileHandle = handle;
-    const profileAvatar = profilePic;
-    const metadata = {
-      display_name: profileName,
-      profile_pic: profileAvatar,
-    };
-    console.log(contract);
-    //upload to filecoin
+    console.log(chain.id);
+    if (chain.id !== 3141) {
+      toast.error("Connect to Hyperspace Testnet", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } else {
+      profilePic = await storeFile(profilePic);
+      const metadata = {
+        display_name: userName,
+        profile_pic: profilePic,
+        bio: bio,
+        banner: "",
+      };
+      const blob = new Blob([JSON.stringify(metadata)], {
+        type: "application/json",
+      });
+      const metadataURI = await storeFile(blob);
+      console.log(metadataURI, metadata);
+      const id = await contract.createUser(handle, metadataURI);
+      // setLoading(false);
+      toast.success("User Created", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      router.push(`/home`);
+    }
   };
 
   return (

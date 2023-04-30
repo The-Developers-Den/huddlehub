@@ -1,9 +1,18 @@
+import React, { useEffect } from "react";
 import WalletConnect from "@/components/Buttons/WalletConnect";
-import {useConnect, } from "wagmi";
+import { useConnect, useAccount } from "wagmi";
+import { useRouter } from "next/router";
 import ConnectWallet from "@/components/Panels/WalletPanel";
 
 const Walletconnect = () => {
   const { connectors } = useConnect();
+  const { isConnected } = useAccount();
+  const router = useRouter();
+  useEffect(() => {
+    if (isConnected) {
+      router.push("/createuser");
+    }
+  }, [isConnected]);
   return (
     <div className="flex w-full h-[100vh] font-worksans">
       <section className="basis-[48%] text-center relative bg-white  ">

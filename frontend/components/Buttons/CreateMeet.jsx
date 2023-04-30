@@ -16,6 +16,7 @@ const CreateMeet = ({
 }) => {
   const { address } = useAccount();
   const { storeFile } = useWeb3Storage();
+
   const handleOnClick = async () => {
     setLoading(true);
     thumbnail = await storeFile(thumbnail);
