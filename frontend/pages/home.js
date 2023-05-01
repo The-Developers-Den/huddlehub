@@ -18,14 +18,19 @@ const Home = () => {
     abi: HuddleContract.abi,
     functionName: "getUsers",
   });
+  const { data: posts } = useContractRead({
+    address: HuddleContract.address,
+    abi: HuddleContract.abi,
+    functionName: "getPost",
+  });
   useEffect(() => {
     setUsers(data);
     if (data?.length > 0 && !primaryProfile) {
       const resp = data.find((user) => user.account === address);
       setPrimaryProfile(resp);
     }
-  }, []);
-
+  }, [data]);
+  console.log(posts);
   const post = {
     authorHandle: "test",
     body: "Hola amigos",
@@ -51,7 +56,7 @@ const Home = () => {
           <div className="basis-[70%] px-5 h-[80vh] overflow-y-scroll">
             <PostInput />
             {/* {!posts && <h2>No Posts</h2>} */}
-            <PostCard {...post} />
+            {posts && posts.map((post, id) => <PostCard {...post} key={id} />)}
             {/* {posts && posts.map((post, id) => <PostCard {...post} key={id} />)} */}
           </div>
           <div className="basis-[30%] px-3">

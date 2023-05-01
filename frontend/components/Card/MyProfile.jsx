@@ -17,7 +17,7 @@ const MyProfile = ({
       axios.get(primaryProfile.metadata).then((res) => {
         setProfile(res.data);
       });
-  });
+  }, []);
 
   return (
     <div className="relative bg-[#13141D] border-[#414141] border rounded-lg flex flex-col w-[95%] mx-auto my-2 mb-9">

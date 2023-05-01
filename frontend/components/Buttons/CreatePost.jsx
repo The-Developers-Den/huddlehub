@@ -2,10 +2,11 @@ import { useAccount, useContract, useSigner } from "wagmi";
 import HuddleContract from "@/abi/HuddleHubContract.json";
 import useWeb3Storage from "@/hooks/useWeb3Storage";
 import { toast } from "react-toastify";
+import axios from "axios";
 import { useRouter } from "next/router";
 import { useNetwork } from "wagmi";
 
-const CreateProfile = ({ handle, userName, profilePic, bio }) => {
+const CreatePost = ({ image, body, profileMetadata, username }) => {
   const { chain } = useNetwork();
   const { data: signer } = useSigner();
   const router = useRouter();
@@ -30,21 +31,24 @@ const CreateProfile = ({ handle, userName, profilePic, bio }) => {
         theme: "dark",
       });
     } else {
-      profilePic = await storeFile(profilePic);
+      image ? (image = await storeFile(image)) : "";
+      const profile = await axios.get(profileMetadata);
       const metadata = {
-        display_name: userName,
-        profile_pic: profilePic,
-        bio: bio,
-        banner: "",
+        image: image,
+        body: body,
+        display_name: profile?.data?.display_name,
+        profile_pic: profile?.data?.profile_pic,
+        username: username,
       };
       const blob = new Blob([JSON.stringify(metadata)], {
         type: "application/json",
       });
-      const file = new File([blob], "metadata.json");
+      const file = new File([blob], "post_metadata.json");
       const metadataURI = await storeFile(file);
-      const id = await contract.createUser(handle, metadataURI);
+      console.log(metadataURI, metadata);
+      const id = await contract.createPost(metadataURI);
       // setLoading(false);
-      toast.success("User Created", {
+      toast.success("Post Created", {
         position: "top-right",
         autoClose: 3000,
         hideProgressBar: false,
@@ -54,18 +58,21 @@ const CreateProfile = ({ handle, userName, profilePic, bio }) => {
         progress: undefined,
         theme: "dark",
       });
-      router.push(`/home`);
+      setTimeout(() => {
+        router.reload();
+      }, 3000);
+      // router.push(`/home`);
     }
   };
 
   return (
     <button
-      className="rounded-lg px-5 mx-2 py-2 hover:scale-95 ease-in-out duration-300 min-w-fit w-[30%]  bg-gradient-to-r from-[#B537E5] via-[#F44A9B]  to-[#FF876E] my-10"
+      className="rounded-lg p-1  hover:scale-95 ease-in-out duration-300 text-base w-[15%] bg-gradient-to-r from-[#B537E5] via-[#F44A9B]  to-[#FF876E]"
       onClick={handleOnClick}
     >
-      Create Profile
+      Post
     </button>
   );
 };
 
-export default CreateProfile;
+export default CreatePost;

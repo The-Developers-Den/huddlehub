@@ -9,7 +9,7 @@ const SuggestedSubscribers = ({ id, username, metadata }) => {
       axios.get(metadata).then((res) => {
         setProfile(res.data);
       });
-  });
+  }, []);
   // const  = axios.get(metadata);
   // const { display_name, bio, banner, profile_pic } = axios.get(metadata);
 

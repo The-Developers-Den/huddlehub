@@ -1,32 +1,38 @@
 import React from "react";
 import Image from "next/image";
 import dateFormat from "dateformat";
-// import { AuthContext } from "@/context/auth";
+import axios from "axios";
+import ethers from "ethers";
+import { ProfileContext } from "@/context/profile";
 import { useSigner } from "wagmi";
 
-const PostCard = ({
-  contentID,
-  authorHandle,
-  title,
-  body,
-  createdAt,
-  likeCount,
-  dislikeCount,
-  commentCount,
-  likedStatus,
-}) => {
+const PostCard = ({ id, content, created, owner }) => {
   const { data: signer } = useSigner();
+  const [profile, setProfile] = React.useState(null);
+  const [postData, setPostData] = React.useState(null);
+  const likedStatus = "";
+  const { primaryProfile } = React.useContext(ProfileContext);
 
+  React.useEffect(() => {
+    primaryProfile?.metadata &&
+      axios.get(primaryProfile.metadata).then((res) => {
+        setProfile(res.data);
+      });
+    content &&
+      axios.get(content).then((res) => {
+        setPostData(res.data);
+      });
+  }, []);
   const handleLike = async () => {};
   const handleDisLike = async () => {};
   const handleCancelReaction = async () => {};
-  //   const { primaryProfile } = React.useContext(AuthContext);
+
   return (
     <div className="bg-[#13141D] border-[#414141] border rounded-lg py-3 px-5 w-[95%] mx-auto my-2">
       <section className="flex justify-between">
         <div className="basis-[75%] flex justify-start my-3">
           <Image
-            src={"/assets/default-user.jpg"}
+            src={postData?.profile_pic || "/assets/default-user-2.png"}
             alt=""
             height="100"
             width="100"
@@ -34,30 +40,33 @@ const PostCard = ({
           />
           <span className="ml-2">
             <h2 className="text-base font-medium mt-1">
-              {
-                /* {primaryProfile?.metadataInfo?.displayName ||  */
-                "John Doe"
-              }
+              {postData?.display_name || "Sam Miller"}
             </h2>
-            <h2 className="text-sm">@{authorHandle}</h2>
+            <h2 className="text-sm">@{postData?.username}</h2>
           </span>
         </div>
         <h2 className="text-xs text-[#8F8F8F] my-auto">
           {" "}
-          {dateFormat(new Date(createdAt), "dddd, mmmm dS yyyy")}
+          {/* {dateFormat(
+            new Date(ethers.utils.formatEther(created)),
+            "dddd, mmmm dS yyyy"
+          )} */}
+          {dateFormat(new Date(), "dddd, mmmm dS yyyy")}
         </h2>
       </section>
       <div>
-        <h2 className="text-sm my-3">{body}</h2>
-        <Image
-          src="/assets/img2.png"
-          alt="post-img"
-          width="300"
-          height="300"
-          className="rounded my-2"
-        />
+        <h2 className="text-sm my-3">{postData?.body}</h2>
+        {postData?.image && (
+          <Image
+            src={postData?.image || "/assets/img2.png"}
+            alt="post-img"
+            width="300"
+            height="300"
+            className="rounded my-2"
+          />
+        )}
       </div>
-      <section className="flex justify-between my-2">
+      <section className="flex justify-between my-4">
         <h2 className="text-xs text-[#667085]">Liked by john and 14 others</h2>
         <div className="flex justify-around">
           <span className="flex text-xs mx-2">
@@ -99,7 +108,7 @@ const PostCard = ({
               </button>
             )}
 
-            <h3>{likeCount}</h3>
+            <h3>{20}</h3>
           </span>
           <span className="flex text-xs mx-2">
             <svg
@@ -117,7 +126,7 @@ const PostCard = ({
                 clipRule="evenodd"
               ></path>
             </svg>
-            <h3>{commentCount}</h3>
+            <h3>{4}</h3>
           </span>
           <span className="flex text-xs ">
             {likedStatus.disliked ? (
@@ -158,17 +167,13 @@ const PostCard = ({
               </button>
             )}
 
-            <h3>{dislikeCount}</h3>
+            <h3>{2}</h3>
           </span>
         </div>
       </section>
       <section className="flex my-3 justify-start">
         <Image
-          src={
-            // primaryProfile?.avatar ||
-            // primaryProfile?.metadataInfo?.avatar ||
-            "/assets/default-user.jpg"
-          }
+          src={profile?.profile_pic || "/assets/default-user.jpg"}
           alt=""
           height="100"
           width="100"
