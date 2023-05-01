@@ -10,11 +10,10 @@ const useWeb3Storage = () => {
   };
 
   const storeFile = async (file, token) => {
-    console.log("inside store file");
     try {
       const client = makeStorageClient();
       const cid = await client.put([file]);
-      return cid;
+      return "https://" + cid + ".ipfs.w3s.link/" + file.name;
     } catch (err) {
       console.error(err);
     }
@@ -23,14 +22,13 @@ const useWeb3Storage = () => {
   const retrieveFile = async (cid) => {
     const client = makeStorageClient();
     const res = await client.get(cid);
-    console.log(`Got a response! [${res.status}] ${res.statusText}`);
     if (!res.ok) {
       throw new Error(
         `Failed to get ${cid} - [${res.status}] ${res.statusText}`
       );
     }
     const file = await res.files();
-    console.log(file);
+    return file[0];
   };
 
   return { makeStorageClient, storeFile, retrieveFile };

@@ -158,8 +158,6 @@ const LobbyCard = ({ handleClose, roomId, videoRef }) => {
           </div>
         )
       )}
-
-      {console.log(peers)}
     </div>
   );
 };

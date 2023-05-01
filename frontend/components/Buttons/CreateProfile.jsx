@@ -1,6 +1,6 @@
-import { useAccount, useContract, useSignMessage, useSigner } from "wagmi";
+import { useAccount, useContract, useSigner } from "wagmi";
 import HuddleContract from "@/abi/HuddleHubContract.json";
-import useWeb3Storage from "@/hooks/useWeb3Sorage";
+import useWeb3Storage from "@/hooks/useWeb3Storage";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { useNetwork } from "wagmi";
@@ -19,7 +19,6 @@ const CreateProfile = ({ handle, userName, profilePic, bio }) => {
   });
 
   const handleOnClick = async () => {
-    console.log(chain.id);
     if (chain.id !== 3141) {
       toast.error("Connect to Hyperspace Testnet", {
         position: "top-right",
@@ -42,8 +41,8 @@ const CreateProfile = ({ handle, userName, profilePic, bio }) => {
       const blob = new Blob([JSON.stringify(metadata)], {
         type: "application/json",
       });
-      const metadataURI = await storeFile(blob);
-      console.log(metadataURI, metadata);
+      const file = new File([blob], "metadata.json");
+      const metadataURI = await storeFile(file);
       const id = await contract.createUser(handle, metadataURI);
       // setLoading(false);
       toast.success("User Created", {

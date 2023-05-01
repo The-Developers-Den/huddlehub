@@ -9,6 +9,7 @@ import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
 import { publicProvider } from "wagmi/providers/public";
+import { ProfileContextProvider } from "@/context/profile";
 
 const { chains, provider } = configureChains(
   [filecoin, filecoinHyperspace],
@@ -46,7 +47,6 @@ const client = createClient({
 });
 
 export default function App({ Component, pageProps }) {
-  
   const [ready, setReady] = React.useState(false);
   React.useEffect(() => {
     setReady(true);
@@ -55,19 +55,21 @@ export default function App({ Component, pageProps }) {
     <>
       {ready ? (
         <WagmiConfig client={client}>
-          <ToastContainer
-            position="top-right"
-            autoClose={3000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="dark"
-          />
-          <Component {...pageProps} />
+          <ProfileContextProvider>
+            <ToastContainer
+              position="top-right"
+              autoClose={3000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="dark"
+            />
+            <Component {...pageProps} />
+          </ProfileContextProvider>
         </WagmiConfig>
       ) : (
         <div className="w-[100vw] h-[100vh] flex justify-center">

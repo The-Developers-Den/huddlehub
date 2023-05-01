@@ -36,6 +36,7 @@ const Room = () => {
   React.useEffect(() => {
     initialize(process.env.NEXT_PUBLIC_HUDDLE_PROJECT_ID);
     !isRoomJoined && handleOpen();
+    console.log("isRoomJoined", isRoomJoined);
   }, []);
 
   useEventListener("room:joined", () => {

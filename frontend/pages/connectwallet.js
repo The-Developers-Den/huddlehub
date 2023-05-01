@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
 import WalletConnect from "@/components/Buttons/WalletConnect";
-import { useConnect, useAccount } from "wagmi";
+import { useConnect, useAccount, useNetwork } from "wagmi";
 import { useRouter } from "next/router";
 import ConnectWallet from "@/components/Panels/WalletPanel";
 
 const Walletconnect = () => {
   const { connectors } = useConnect();
   const { isConnected } = useAccount();
+  const { chain } = useNetwork();
   const router = useRouter();
   useEffect(() => {
-    if (isConnected) {
+    if (isConnected && chain.id === 3141) {
       router.push("/createuser");
     }
   }, [isConnected]);

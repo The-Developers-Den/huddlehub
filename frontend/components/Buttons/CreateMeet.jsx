@@ -1,6 +1,6 @@
 import { useAccount } from "wagmi";
 import { toast } from "react-toastify";
-import useWeb3Storage from "@/hooks/useWeb3Sorage";
+import useWeb3Storage from "@/hooks/useWeb3Storage";
 import axios from "axios";
 
 const CreateMeet = ({

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import SideBar from "@/components/Navbar/SideBar";
 import AddressBar from "@/components/Navbar/AddressBar";
 import MyProfile from "@/components/Card/MyProfile";
@@ -6,34 +6,34 @@ import PostCard from "@/components/Card/PostCard";
 import MeetCard from "@/components/Card/MeetCard";
 import SuggestedSubscribers from "@/components/Card/SuggestedSubscribers";
 import Modal from "@mui/material/Modal";
+import { ProfileContext } from "@/context/profile";
+import { useContractRead, useAccount } from "wagmi";
+import HuddleContract from "@/abi/HuddleHubContract.json";
 import CreateMeetForm from "@/components/Forms/CreateMeet";
 
 const Profile = () => {
+  const { address } = useAccount();
   const [showPosts, setShowPosts] = useState(true);
   const [showMeet, setShowMeet] = useState(false);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
+  const { setUsers, primaryProfile, setPrimaryProfile } =
+    useContext(ProfileContext);
   const handleClose = () => setOpen(false);
-  const sub = [
-    {
-      handle: "marry",
-      avatar:
-        "https://png.pngtree.com/png-vector/20211106/ourlarge/pngtree-pizza-pixel-png-image_4023257.png",
-      metadataInfo: {
-        displayName: "Marry",
-        avatar: "",
-      },
-    },
-    {
-      handle: "tom",
-      avatar:
-        "https://preview.keenthemes.com/metronic-v4/theme/assets/pages/media/profile/profile_user.jpg",
-      metadataInfo: {
-        displayName: "Tom Handles",
-        avatar: "",
-      },
-    },
-  ];
+  const { data } = useContractRead({
+    address: HuddleContract.address,
+    abi: HuddleContract.abi,
+    functionName: "getUsers",
+  });
+
+  useEffect(() => {
+    setUsers(data);
+    if (data?.length > 0 && !primaryProfile) {
+      const resp = data.find((user) => user.account === address);
+      setPrimaryProfile(resp);
+    }
+  }, []);
+
   const post = {
     authorHandle: "test",
     body: "Hola amigos",
@@ -76,10 +76,11 @@ const Profile = () => {
           </div>
           <div className="basis-[30%] px-3">
             <h2 className="text-base font-medium">Suggested Followers</h2>
-            <div className="h-[30vh] overflow-y-scroll">
-              {sub.map((item, id) => (
-                <SuggestedSubscribers {...item} key={id} />
-              ))}
+            <div className="h-[37vh] overflow-y-scroll">
+              {data &&
+                data.map((user, id) => (
+                  <SuggestedSubscribers {...user} key={id} />
+                ))}
             </div>
             <h2 className="text-base font-medium mt-4">Latest Activity</h2>
             <h3 className="text-sm mx-auto text-[#414141] text-center my-4">

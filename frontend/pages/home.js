@@ -4,30 +4,28 @@ import AddressBar from "@/components/Navbar/AddressBar";
 import SuggestedSubscribers from "@/components/Card/SuggestedSubscribers";
 import PostInput from "@/components/Card/PostInput";
 import PostCard from "@/components/Card/PostCard";
-import { useAccount } from "wagmi";
+import { useContractRead, useAccount } from "wagmi";
+import { ProfileContext } from "@/context/profile";
+import HuddleContract from "@/abi/HuddleHubContract.json";
 
 const Home = () => {
+  const { setUsers, setPrimaryProfile, primaryProfile } =
+    useContext(ProfileContext);
   const { address } = useAccount();
-  const sub = [
-    {
-      handle: "marry",
-      avatar:
-        "https://png.pngtree.com/png-vector/20211106/ourlarge/pngtree-pizza-pixel-png-image_4023257.png",
-      metadataInfo: {
-        displayName: "Marry",
-        avatar: "",
-      },
-    },
-    {
-      handle: "tom",
-      avatar:
-        "https://preview.keenthemes.com/metronic-v4/theme/assets/pages/media/profile/profile_user.jpg",
-      metadataInfo: {
-        displayName: "Tom Handles",
-        avatar: "",
-      },
-    },
-  ];
+
+  const { data } = useContractRead({
+    address: HuddleContract.address,
+    abi: HuddleContract.abi,
+    functionName: "getUsers",
+  });
+  useEffect(() => {
+    setUsers(data);
+    if (data?.length > 0 && !primaryProfile) {
+      const resp = data.find((user) => user.account === address);
+      setPrimaryProfile(resp);
+    }
+  }, []);
+
   const post = {
     authorHandle: "test",
     body: "Hola amigos",
@@ -37,30 +35,7 @@ const Home = () => {
     commentCount: "20",
     likedStatus: "",
   };
-  //   useEffect(() => {
-  //     if (!(accessToken && primaryProfile)) {
-  //       return;
-  //     }
-  //     const fetch = async () => {
-  //       try {
-  //         const res = await getPrimaryProfilePosts({
-  //           variables: {
-  //             address: address,
-  //           },
-  //         });
-  //         var allPosts: any = [];
-  //         const posts1 = res?.data?.address?.wallet?.primaryProfile?.posts?.edges;
 
-  //         posts1.map((post: { node: any }) => {
-  //           allPosts.push({ ...post.node, comments: post.node.comments.edges });
-  //         });
-  //         setPosts(allPosts);
-  //       } catch (error) {
-  //         console.error(error);
-  //       }
-  //     };
-  //     fetch();
-  //   }, [address, accessToken, primaryProfile]);
   return (
     <div className="flex font-inter ">
       <div className="fixed w-[18vw]">
@@ -81,10 +56,11 @@ const Home = () => {
           </div>
           <div className="basis-[30%] px-3">
             <h2 className="text-base font-medium">Suggested Followers</h2>
-            <div className="h-[30vh] overflow-y-scroll">
-              {sub.map((item, id) => (
-                <SuggestedSubscribers {...item} key={id} />
-              ))}
+            <div className="h-[37vh] overflow-y-scroll">
+              {data &&
+                data.map((user, id) => (
+                  <SuggestedSubscribers {...user} key={id} />
+                ))}
             </div>
             <h2 className="text-base font-medium mt-4">Latest Activity</h2>
             <h3 className="text-sm mx-auto text-[#414141] text-center my-4">
