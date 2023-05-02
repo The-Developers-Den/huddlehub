@@ -25,6 +25,12 @@ const Profile = () => {
     abi: HuddleContract.abi,
     functionName: "getUsers",
   });
+  const { data: posts } = useContractRead({
+    address: HuddleContract.address,
+    abi: HuddleContract.abi,
+    functionName: "getPostsByUser",
+    overrides: { from: address },
+  });
 
   useEffect(() => {
     setUsers(data);
@@ -34,16 +40,7 @@ const Profile = () => {
     }
   }, []);
 
-  const post = {
-    authorHandle: "test",
-    body: "Hola amigos",
-    createdAt: 1682760590858,
-    likeCount: "3",
-    dislikeCount: "2",
-    commentCount: "20",
-    likedStatus: "",
-  };
-
+  console.log(posts);
   return (
     <div className="flex font-inter ">
       <div className="fixed w-[18vw]">
@@ -62,7 +59,8 @@ const Profile = () => {
             />
             {showPosts && (
               <div>
-                <PostCard {...post} />
+                {posts &&
+                  posts.map((post, id) => <PostCard {...post} key={id} />)}
               </div>
             )}
             {showMeet && (
@@ -71,8 +69,6 @@ const Profile = () => {
                 <MeetCard />
               </div>
             )}
-            {/* {!posts && <h2>No Posts</h2>} */}
-            {/* {posts && posts.map((post, id) => <PostCard {...post} key={id} />)} */}
           </div>
           <div className="basis-[30%] px-3">
             <h2 className="text-base font-medium">Suggested Followers</h2>

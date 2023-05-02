@@ -28,7 +28,7 @@ const PostCard = ({ id, content, created, owner }) => {
   const handleCancelReaction = async () => {};
 
   return (
-    <div className="bg-[#13141D] border-[#414141] border rounded-lg py-3 px-5 w-[95%] mx-auto my-2">
+    <div className="bg-[#13141D] border-[#414141] border rounded-lg py-3 px-5 w-[95%] mx-auto my-3">
       <section className="flex justify-between">
         <div className="basis-[75%] flex justify-start my-3">
           <Image

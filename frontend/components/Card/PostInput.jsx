@@ -17,7 +17,7 @@ const PostInput = () => {
       axios.get(primaryProfile.metadata).then((res) => {
         setProfile(res.data);
       });
-  }, []);
+  }, [primaryProfile]);
   const [content, setContent] = React.useState({
     image: "",
     body: "",

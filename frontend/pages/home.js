@@ -24,22 +24,16 @@ const Home = () => {
     functionName: "getPost",
   });
   useEffect(() => {
-    setUsers(data);
+    console.log("hello");
     if (data?.length > 0 && !primaryProfile) {
       const resp = data.find((user) => user.account === address);
+      console.log("hello in");
+      // console.log(resp);
       setPrimaryProfile(resp);
+      console.log(primaryProfile);
     }
+    setUsers(data);
   }, [data]);
-  console.log(posts);
-  const post = {
-    authorHandle: "test",
-    body: "Hola amigos",
-    createdAt: 1682760590858,
-    likeCount: "3",
-    dislikeCount: "2",
-    commentCount: "20",
-    likedStatus: "",
-  };
 
   return (
     <div className="flex font-inter ">

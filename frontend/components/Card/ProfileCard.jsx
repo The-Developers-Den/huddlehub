@@ -15,7 +15,7 @@ const ProfileCard = () => {
       axios.get(primaryProfile.metadata).then((res) => {
         setProfile(res.data);
       });
-  }, []);
+  }, [primaryProfile]);
 
   const handleClick = () => {
     disconnect();
