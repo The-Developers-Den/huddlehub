@@ -42,7 +42,7 @@ const PostCard = ({ id, content, created, owner }) => {
             <h2 className="text-base font-medium mt-1">
               {postData?.display_name || "Sam Miller"}
             </h2>
-            <h2 className="text-sm">@{postData?.username}</h2>
+            <h2 className="text-sm">@{postData?.username || "samm"}</h2>
           </span>
         </div>
         <h2 className="text-xs text-[#8F8F8F] my-auto">

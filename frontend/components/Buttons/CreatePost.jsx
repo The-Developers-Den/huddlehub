@@ -38,13 +38,12 @@ const CreatePost = ({ image, body, profileMetadata, username }) => {
         setLoader(true);
         image ? (image = await storeFile(image)) : "";
         const profile = await axios.get(primaryProfile?.metadata);
-        console.log(profile);
         const metadata = {
           image: image,
           body: body,
           display_name: profile?.data?.display_name,
           profile_pic: profile?.data?.profile_pic,
-          username: username,
+          username: primaryProfile?.username,
         };
         console.log(metadata);
         const blob = new Blob([JSON.stringify(metadata)], {
