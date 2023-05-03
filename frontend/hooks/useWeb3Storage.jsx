@@ -1,5 +1,4 @@
 import React from "react";
-import toast from "react-toastify";
 import { Web3Storage } from "web3.storage";
 
 const useWeb3Storage = () => {

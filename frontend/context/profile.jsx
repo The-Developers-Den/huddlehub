@@ -7,7 +7,7 @@ export const ProfileContext = createContext(null);
 
 export const ProfileContextProvider = ({ children }) => {
   const [primaryProfile, setPrimaryProfile] = useState(null);
-  const { isConnected, address } = useAccount();
+  const { address } = useAccount();
   const [users, setUsers] = useState([]);
   const [meets, setMeets] = useState([
     {
@@ -39,10 +39,6 @@ export const ProfileContextProvider = ({ children }) => {
   const [loader, setLoader] = useState(false);
   const { data: signer } = useSigner();
   const router = useRouter();
-
-  // useEffect(() => {
-  //   !isConnected && router.push("/connectwallet");
-  // }, [isConnected]);
 
   useEffect(() => {
     if (chain && chain.id !== 3141) {

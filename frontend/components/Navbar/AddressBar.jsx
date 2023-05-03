@@ -40,11 +40,6 @@ const AddressBar = () => {
             Connect Wallet
           </Link>
         )}
-        {/* {!primaryProfile?.profileID && (
-          <Link href="/createprofile" className="font-semibold text-sm">
-            Create Profile
-          </Link>
-        )} */}
       </section>
     </nav>
   );

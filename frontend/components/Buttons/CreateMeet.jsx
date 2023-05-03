@@ -63,7 +63,6 @@ const CreateMeet = ({
       type: type,
       title: title,
     };
-    console.log(meetMetadata);
     setMeets([...meets, meetMetadata]);
     setLoading(false);
     toast.success("Meet Created", {
@@ -80,18 +79,6 @@ const CreateMeet = ({
       handleClose();
     }, 2000);
   };
-  //   creator
-  // :
-  // "0x9d8c061125e2c416F472feC3A18C3fD48E88bA18"
-  // roomId
-  // :
-  // "jby-qqjp-ezf"
-  // thumbnail
-  // :
-  // "https://bafybeiew67u4h6rqtc2j6lgn2h3qlhtluyux4gmearzyatotr6xpo4kyjy.ipfs.w3s.link/Screenshot 2023-04-14 031205.png"
-  // type
-  // :
-  // "general"
 
   return (
     <>

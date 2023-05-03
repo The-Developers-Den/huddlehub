@@ -10,7 +10,7 @@ const SideBar = () => {
       <section className="">
         <section>
           <h2 className="my-5 mx-auto text-xl font-[590] font-worksans">
-            HuddleHub
+            Huddlerr
           </h2>
         </section>
         <div className="flex border rounded-xl mb-5 h-fit  ">

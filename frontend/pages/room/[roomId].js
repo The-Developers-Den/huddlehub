@@ -49,7 +49,6 @@ const Room = () => {
     // playExit();
   });
   if (camStream && videoRef.current) {
-    console.log("camStream", camStream);
     videoRef.current.srcObject = camStream;
   }
 
@@ -142,7 +141,6 @@ const Room = () => {
       )}
 
       <div className="h-[85%] mt-5 grid grid-cols-3 grid-rows-3 overflow-y-scroll gap-5 p-4 items-center content-center font-worksans">
-        {console.log("peer", peers)}
         {Object.values(peers)
           // .slice(1)
           .filter((peer) => peer.cam)

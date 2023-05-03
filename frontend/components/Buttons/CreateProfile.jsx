@@ -1,4 +1,4 @@
-import { useAccount, useContract, useSigner } from "wagmi";
+import { useContract, useSigner } from "wagmi";
 import HuddleContract from "@/abi/HuddleHubContract.json";
 import useWeb3Storage from "@/hooks/useWeb3Storage";
 import { toast } from "react-toastify";
@@ -47,7 +47,6 @@ setLoader(true)
       const file = new File([blob], "metadata.json");
       const metadataURI = await storeFile(file);
       const id = await contract.createUser(handle, metadataURI);
-      // setLoading(false);
       toast.success("User Created", {
         position: "top-right",
         autoClose: 3000,

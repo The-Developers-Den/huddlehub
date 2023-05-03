@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { BsFillCircleFill } from "react-icons/bs";

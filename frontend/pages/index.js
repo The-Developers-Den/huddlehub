@@ -18,7 +18,7 @@ const Walletconnect = () => {
   }, [isConnected]);
   return (
     <div className="flex w-full h-[100vh] font-worksans">
-      <section className="basis-[48%] text-center relative bg-white  ">
+      <section className="basis-[48%] text-center relative bg-white">
         <ConnectWallet heading="Connect Wallet" />
       </section>
       <section className="basis-[52%] flex flex-col justify-center text-center">

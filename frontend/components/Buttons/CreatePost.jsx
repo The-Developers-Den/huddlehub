@@ -1,4 +1,4 @@
-import { useAccount, useContract, useSigner } from "wagmi";
+import { useContract, useSigner } from "wagmi";
 import HuddleContract from "@/abi/HuddleHubContract.json";
 import useWeb3Storage from "@/hooks/useWeb3Storage";
 import { toast } from "react-toastify";
@@ -49,7 +49,6 @@ const CreatePost = ({ image, body, profileMetadata, username }) => {
       });
       const file = new File([blob], "post_metadata.json");
       const metadataURI = await storeFile(file);
-      console.log(metadataURI, metadata);
       const id = await contract.createPost(metadataURI);
       setLoader(false);
       toast.success("Post Created", {
@@ -65,7 +64,6 @@ const CreatePost = ({ image, body, profileMetadata, username }) => {
       setTimeout(() => {
         router.reload();
       }, 3000);
-      // router.push(`/home`);
     }
   };
 

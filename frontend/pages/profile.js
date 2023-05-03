@@ -17,7 +17,7 @@ const Profile = () => {
   const [showMeet, setShowMeet] = useState(false);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-  const { setUsers, primaryProfile, setPrimaryProfile } =
+  const { setUsers, primaryProfile, setPrimaryProfile, meets } =
     useContext(ProfileContext);
   const handleClose = () => setOpen(false);
   const { data } = useContractRead({
@@ -40,7 +40,6 @@ const Profile = () => {
     }
   }, []);
 
-  console.log(posts);
   return (
     <div className="flex font-inter ">
       <div className="fixed w-[18vw]">
@@ -65,8 +64,11 @@ const Profile = () => {
             )}
             {showMeet && (
               <div className="px-5 grid grid-cols-2 gap-5 ">
-                <MeetCard />
-                <MeetCard />
+                {meets.map((meet) => {
+                  if (meet.creator === address) {
+                    return <MeetCard {...meet} />;
+                  }
+                })}
               </div>
             )}
           </div>

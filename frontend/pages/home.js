@@ -28,7 +28,6 @@ const Home = () => {
     if (data?.length > 0 && !primaryProfile) {
       const resp = data.find((user) => user.account === address);
       setPrimaryProfile(resp);
-      console.log(primaryProfile);
     }
     setUsers(data);
   }, [data]);
