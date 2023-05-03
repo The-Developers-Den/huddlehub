@@ -3,13 +3,13 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { BsFillCircleFill } from "react-icons/bs";
 
-const MeetCard = ({ roomId, image }) => {
+const MeetCard = ({ creator: address, type, roomId, thumbnail, title }) => {
   const router = useRouter();
   return (
     <div className="flex flex-col relative hover:scale-[.98] ease-in-out duration-300  min-h-fit min-w-fit  rounded-lg  bg-[#13141D] shadow-sm border border-[#414141] ">
       <Image
         src={
-          image ||
+          thumbnail ||
           "https://mobilegrowthassociation.com/wp-content/uploads/2022/10/MGS22-93-MGS-WEB3NFT-Thumbnail.jpg"
         }
         alt="event"
@@ -27,7 +27,7 @@ const MeetCard = ({ roomId, image }) => {
           Join
         </button>
         <h2 className="text-lg text-center text-[#f2f2f2] my-2 mt-5">
-          Web Masters
+          {title}
         </h2>
       </div>
       <section className="absolute top-0 right-0 bg-[#13141dc4] rounded-lg flex p-1 m-1 text-xs px-2">

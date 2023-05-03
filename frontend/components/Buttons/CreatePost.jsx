@@ -3,6 +3,8 @@ import HuddleContract from "@/abi/HuddleHubContract.json";
 import useWeb3Storage from "@/hooks/useWeb3Storage";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useContext } from "react";
+import { ProfileContext } from "@/context/profile";
 import { useRouter } from "next/router";
 import { useNetwork } from "wagmi";
 
@@ -11,6 +13,7 @@ const CreatePost = ({ image, body, profileMetadata, username }) => {
   const { data: signer } = useSigner();
   const router = useRouter();
   const { storeFile } = useWeb3Storage();
+  const { setLoader } = useContext(ProfileContext);
 
   const contract = useContract({
     address: HuddleContract.address,
@@ -31,6 +34,7 @@ const CreatePost = ({ image, body, profileMetadata, username }) => {
         theme: "dark",
       });
     } else {
+      setLoader(true);
       image ? (image = await storeFile(image)) : "";
       const profile = await axios.get(profileMetadata);
       const metadata = {
@@ -47,7 +51,7 @@ const CreatePost = ({ image, body, profileMetadata, username }) => {
       const metadataURI = await storeFile(file);
       console.log(metadataURI, metadata);
       const id = await contract.createPost(metadataURI);
-      // setLoading(false);
+      setLoader(false);
       toast.success("Post Created", {
         position: "top-right",
         autoClose: 3000,

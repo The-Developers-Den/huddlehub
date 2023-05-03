@@ -1,5 +1,7 @@
 import { useAccount } from "wagmi";
 import { toast } from "react-toastify";
+import { useContext } from "react";
+import { ProfileContext } from "@/context/profile";
 import useWeb3Storage from "@/hooks/useWeb3Storage";
 import axios from "axios";
 
@@ -15,6 +17,7 @@ const CreateMeet = ({
   handleClose,
 }) => {
   const { address } = useAccount();
+  const { meets, setMeets } = useContext(ProfileContext);
   const { storeFile } = useWeb3Storage();
 
   const handleOnClick = async () => {
@@ -53,14 +56,15 @@ const CreateMeet = ({
         ));
 
     const resp = response.data.data;
-    console.log(resp);
     const meetMetadata = {
       thumbnail: thumbnail,
       roomId: resp.roomId,
       creator: address,
       type: type,
+      title: title,
     };
     console.log(meetMetadata);
+    setMeets([...meets, meetMetadata]);
     setLoading(false);
     toast.success("Meet Created", {
       position: "top-right",

@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import React from "react";
 import Image from "next/image";
+import Loader from "@/components/Loader";
 import { WagmiConfig, createClient, configureChains } from "wagmi";
 import { filecoin, filecoinHyperspace } from "wagmi/chains";
 import { ToastContainer } from "react-toastify";
@@ -69,6 +70,7 @@ export default function App({ Component, pageProps }) {
               theme="dark"
             />
             <Component {...pageProps} />
+            <Loader />
           </ProfileContextProvider>
         </WagmiConfig>
       ) : (

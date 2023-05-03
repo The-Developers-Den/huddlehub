@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import dateFormat from "dateformat";
 import axios from "axios";
-import ethers from "ethers";
 import { ProfileContext } from "@/context/profile";
 import { useSigner } from "wagmi";
 
 const PostCard = ({ id, content, created, owner }) => {
   const { data: signer } = useSigner();
+  const [like, setLike] = React.useState(false);
   const [profile, setProfile] = React.useState(null);
+  const [likes, setLikes] = useState(Math.floor(Math.random() * 11));
   const [postData, setPostData] = React.useState(null);
   const likedStatus = "";
   const { primaryProfile } = React.useContext(ProfileContext);
@@ -47,11 +48,10 @@ const PostCard = ({ id, content, created, owner }) => {
         </div>
         <h2 className="text-xs text-[#8F8F8F] my-auto">
           {" "}
-          {/* {dateFormat(
-            new Date(ethers.utils.formatEther(created)),
+          {dateFormat(
+            new Date(created.toNumber() * 1000),
             "dddd, mmmm dS yyyy"
-          )} */}
-          {dateFormat(new Date(), "dddd, mmmm dS yyyy")}
+          )}
         </h2>
       </section>
       <div>
@@ -70,8 +70,13 @@ const PostCard = ({ id, content, created, owner }) => {
         <h2 className="text-xs text-[#667085]">Liked by john and 14 others</h2>
         <div className="flex justify-around">
           <span className="flex text-xs mx-2">
-            {likedStatus.liked ? (
-              <button onClick={handleCancelReaction}>
+            {like ? (
+              <button
+                onClick={() => {
+                  setLike(false);
+                  setLikes(likes - 1);
+                }}
+              >
                 <svg
                   width="16"
                   height="16"
@@ -89,7 +94,12 @@ const PostCard = ({ id, content, created, owner }) => {
                 </svg>
               </button>
             ) : (
-              <button onClick={handleLike}>
+              <button
+                onClick={() => {
+                  setLike(true);
+                  setLikes(likes + 1);
+                }}
+              >
                 <svg
                   width="16"
                   height="16"
@@ -108,7 +118,7 @@ const PostCard = ({ id, content, created, owner }) => {
               </button>
             )}
 
-            <h3>{20}</h3>
+            <h3>{likes}</h3>
           </span>
           <span className="flex text-xs mx-2">
             <svg
@@ -128,7 +138,7 @@ const PostCard = ({ id, content, created, owner }) => {
             </svg>
             <h3>{4}</h3>
           </span>
-          <span className="flex text-xs ">
+          <span className="flex text-xs ml-1 ">
             {likedStatus.disliked ? (
               <button onClick={handleCancelReaction}>
                 <svg

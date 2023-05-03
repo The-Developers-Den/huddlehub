@@ -1,17 +1,18 @@
 import React, { useEffect } from "react";
 import Image from "next/image";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const SuggestedSubscribers = ({ id, username, metadata }) => {
   const [profile, setProfile] = React.useState(null);
+  const [isFollowing, setIsFollowing] = React.useState(false);
+
   useEffect(() => {
     metadata &&
       axios.get(metadata).then((res) => {
         setProfile(res.data);
       });
   }, []);
-  // const  = axios.get(metadata);
-  // const { display_name, bio, banner, profile_pic } = axios.get(metadata);
 
   return (
     <div className="flex my-3 justify-between border border-[#5B5B5B] bg-[#13141D] rounded-xl px-4 py-3 mx-auto font-inter">
@@ -30,8 +31,34 @@ const SuggestedSubscribers = ({ id, username, metadata }) => {
           <h2 className="text-xs text-[#FD5B74]">@{username}</h2>
         </section>
       </div>
-      <button className="my-auto border border-[#FD5B74] py-2 px-3  rounded-lg text-[#FD5B74] hover:bg-[#FD5B74] hover:text-white transition duration-300 ease-in-out text-sm font-medium">
-        <h2 className="text-sm"> Follow</h2>
+      <button
+        className="my-auto border border-[#FD5B74] py-2 px-3  rounded-lg text-[#FD5B74] hover:bg-[#FD5B74] hover:text-white transition duration-300 ease-in-out text-sm font-medium"
+        onClick={() => {
+          setIsFollowing(!isFollowing);
+          isFollowing
+            ? toast.success(`Unfollowed ${username}`, {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+              })
+            : toast.success(`Followed ${username}`, {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+              });
+        }}
+      >
+        <h2 className="text-sm"> {isFollowing ? "Following" : "Follow"}</h2>
       </button>
     </div>
   );

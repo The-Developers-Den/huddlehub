@@ -9,7 +9,7 @@ import { ProfileContext } from "@/context/profile";
 import HuddleContract from "@/abi/HuddleHubContract.json";
 
 const Home = () => {
-  const { setUsers, setPrimaryProfile, primaryProfile } =
+  const { setUsers, setPrimaryProfile, primaryProfile, setLoader } =
     useContext(ProfileContext);
   const { address } = useAccount();
 
@@ -18,13 +18,13 @@ const Home = () => {
     abi: HuddleContract.abi,
     functionName: "getUsers",
   });
-  const { data: posts } = useContractRead({
+  const { data: posts, isLoading } = useContractRead({
     address: HuddleContract.address,
     abi: HuddleContract.abi,
     functionName: "getPost",
   });
   useEffect(() => {
-    console.log("hello");
+    isLoading && setLoader(true);
     if (data?.length > 0 && !primaryProfile) {
       const resp = data.find((user) => user.account === address);
       console.log("hello in");

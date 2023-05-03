@@ -1,19 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
+import axios from "axios";
 import { useEventListener } from "@huddle01/react";
 import { FiMic, FiMicOff, FiVideo, FiVideoOff } from "react-icons/fi";
-import {
-  useLobby,
-  useAudio,
-  useVideo,
-  useRoom,
-  usePeers,
-} from "@huddle01/react/hooks";
+import { useLobby, useAudio, useVideo, useRoom } from "@huddle01/react/hooks";
+import { ProfileContext } from "@/context/profile";
 import { useDisplayName } from "@huddle01/react/app-utils";
 import { RxCross2 } from "react-icons/rx";
 
 const LobbyCard = ({ handleClose, roomId, videoRef }) => {
-  const { peers } = usePeers();
-  const [displayNameText, setDisplayNameText] = React.useState("Guest");
+  const { primaryProfile, setLoader } = React.useContext(ProfileContext);
+  const [profile, setProfile] = React.useState(null);
+  useEffect(() => {
+    primaryProfile?.metadata &&
+      axios.get(primaryProfile.metadata).then((res) => {
+        setProfile(res.data);
+      });
+  }, [primaryProfile]);
+  const [displayNameText, setDisplayNameText] = React.useState(
+    profile?.display_name || "Guest"
+  );
   const { joinRoom, leaveRoom, isRoomJoined, error } = useRoom();
   const { setDisplayName, error: displayNameError } = useDisplayName();
 
@@ -34,21 +39,21 @@ const LobbyCard = ({ handleClose, roomId, videoRef }) => {
   const {
     fetchVideoStream,
     stopVideoStream,
-    produceVideo,
     isProducing: isVideo,
-    stream: videoStream,
+    stream: camStream,
     error: viderr,
   } = useVideo();
   useEventListener("lobby:cam-on", () => {
-    if (videoStream && videoRef.current)
-      videoRef.current.srcObject = videoStream;
+    if (camStream && videoRef.current) videoRef.current.srcObject = camStream;
   });
   useEventListener("room:joined", () => {
     handleClose();
   });
   React.useEffect(() => {
     isRoomJoined && handleClose();
+    isLoading ? setLoader(true) : setLoader(false);
   }, []);
+
   return (
     <div className="bg-[#13141D] rounded-lg mx-auto w-[50%] h-fit px-5 py-3 font-worksans text-center relative ">
       <RxCross2
@@ -87,12 +92,12 @@ const LobbyCard = ({ handleClose, roomId, videoRef }) => {
           <div className="flex flex-col">
             <h2 className="text-xl font-medium my-4">Lobby</h2>
             <div className={"mx-auto relative w-[50%] h-52 my-5"}>
-              {videoStream ? (
+              {camStream ? (
                 <video ref={videoRef} autoPlay muted className="rounded-xl" />
               ) : (
                 <div className="bg-[#635e5e77] w-full h-full rounded-xl flex items-center">
                   <img
-                    src="/assets/default-user.jpg"
+                    src={profile?.profile_pic || "/assets/default-user.jpg"}
                     alt="user"
                     className="rounded-full w-20 h-20 mx-auto "
                   />
@@ -135,7 +140,10 @@ const LobbyCard = ({ handleClose, roomId, videoRef }) => {
               type="text"
               placeholder="What should we call you ?"
               value={displayNameText}
-              onChange={(e) => setDisplayNameText(e.target.value)}
+              onChange={(e) => {
+                setDisplayNameText(e.target.value);
+                setDisplayName.isCallable && setDisplayName(e.target.value);
+              }}
               className=" bg-[#070B13] my-1 rounded-lg  mx-auto border-none p-3 outline-none w-[45%] text-sm"
             />
             <div className="flex my-4">

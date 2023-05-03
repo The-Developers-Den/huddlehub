@@ -4,11 +4,14 @@ import useWeb3Storage from "@/hooks/useWeb3Storage";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { useNetwork } from "wagmi";
+import { useContext } from "react";
+import { ProfileContext } from "@/context/profile";
 
 const CreateProfile = ({ handle, userName, profilePic, bio }) => {
   const { chain } = useNetwork();
   const { data: signer } = useSigner();
   const router = useRouter();
+  const {setLoader } = useContext(ProfileContext);
   const { storeFile } = useWeb3Storage();
 
   const contract = useContract({
@@ -30,6 +33,7 @@ const CreateProfile = ({ handle, userName, profilePic, bio }) => {
         theme: "dark",
       });
     } else {
+setLoader(true)
       profilePic = await storeFile(profilePic);
       const metadata = {
         display_name: userName,
@@ -54,6 +58,7 @@ const CreateProfile = ({ handle, userName, profilePic, bio }) => {
         progress: undefined,
         theme: "dark",
       });
+      setLoader(false)
       router.push(`/home`);
     }
   };
