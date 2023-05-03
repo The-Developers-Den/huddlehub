@@ -40,7 +40,7 @@ const PostCard = ({ id, content, created, owner }) => {
           />
           <span className="ml-2">
             <h2 className="text-base font-medium mt-1">
-              {postData?.display_name || "Sam Miller"}
+              {postData?.display_name || "Sam Mill"}
             </h2>
             <h2 className="text-sm">@{postData?.username || "samm"}</h2>
           </span>
