@@ -24,7 +24,7 @@ const Home = () => {
     functionName: "getPost",
   });
   useEffect(() => {
-    isLoading && setLoader(true);
+    isLoading ? setLoader(true) : setLoader(false);
     if (data?.length > 0 && !primaryProfile) {
       const resp = data.find((user) => user.account === address);
       setPrimaryProfile(resp);
