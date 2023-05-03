@@ -31,6 +31,7 @@ const Home = () => {
     }
     setUsers(data);
   }, [data]);
+  console.log(posts);
 
   return (
     <div className="flex font-inter ">
