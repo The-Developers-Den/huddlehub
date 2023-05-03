@@ -1,6 +1,5 @@
-# huddlerr
+# Huddlerr
 ![hackathon-banner](https://videojam.devfolio.co/_next/image?url=https%3A%2F%2Fassets.devfolio.co%2Fhackathons%2F62b9231dd004471890015f4022e3e083%2Fassets%2Fcover%2F277.png&w=1440&q=100)
-
 
 ## About
 
@@ -43,7 +42,7 @@ Here are the steps to be taken after that :
 1. Clone the repository:
 
 ```bash
-git clone shttps://github.com/The-Developers-Den/huddlerrgit
+git clone https://github.com/The-Developers-Den/huddlerrgit
 ```
 
 2. Change directory :
