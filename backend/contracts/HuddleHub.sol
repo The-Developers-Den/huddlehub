@@ -54,12 +54,17 @@ contract Huddle1 {
         }
         return result;
     }
-
     function getPost() public view returns ( Post[] memory) {
-
          Post[] memory result = new  Post[](nextPostId);
         for (uint i = 0; i < nextPostId; i++) {
             result[i] = posts[i];
+        }
+        return result;
+    } 
+    function getUsers() public view returns ( User[] memory) {
+        User[] memory result = new  User[](nextUserId);
+        for (uint i = 0; i < nextUserId; i++) {
+            result[i] = users[i];
         }
         return result;
     } 
