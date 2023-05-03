@@ -7,11 +7,11 @@ export const ProfileContext = createContext(null);
 
 export const ProfileContextProvider = ({ children }) => {
   const [primaryProfile, setPrimaryProfile] = useState(null);
-  const { address } = useAccount();
+  const { isConnected, address } = useAccount();
   const [users, setUsers] = useState([]);
   const [meets, setMeets] = useState([
     {
-      creator: address,
+      creator: "0x9d8c061125e2c416F472feC3A18C3fD48E88bA18",
       type: "general",
       roomId: "sfo-sodv-djm",
       thumbnail:
@@ -19,7 +19,7 @@ export const ProfileContextProvider = ({ children }) => {
       title: "Investing 101",
     },
     {
-      creator: address,
+      creator: "0x9d8c061125e2c416F472feC3A18C3fD48E88bA18",
       type: "general",
       roomId: "jby-qqjp-ezf",
       thumbnail:
@@ -27,7 +27,7 @@ export const ProfileContextProvider = ({ children }) => {
       title: "Play & Earn",
     },
     {
-      creator: address,
+      creator: "0x9d8c061125e2c416F472feC3A18C3fD48E88bA18",
       type: "gated",
       roomId: "dpz-gicq-quf",
       thumbnail:
@@ -39,6 +39,10 @@ export const ProfileContextProvider = ({ children }) => {
   const [loader, setLoader] = useState(false);
   const { data: signer } = useSigner();
   const router = useRouter();
+
+  useEffect(() => {
+    !isConnected && router.push("/");
+  }, [isConnected]);
 
   useEffect(() => {
     if (chain && chain.id !== 3141) {

@@ -10,24 +10,15 @@ import UserCard from "../components/Card/UserCard";
 
 const Connect = () => {
   const { address } = useAccount();
-  const [showPosts, setShowPosts] = useState(true);
-  const [showMeet, setShowMeet] = useState(false);
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
   const { setUsers, primaryProfile, setPrimaryProfile } =
     useContext(ProfileContext);
-  const handleClose = () => setOpen(false);
   const { data } = useContractRead({
     address: HuddleContract.address,
     abi: HuddleContract.abi,
     functionName: "getUsers",
   });
-  const { data: posts } = useContractRead({
-    address: HuddleContract.address,
-    abi: HuddleContract.abi,
-    functionName: "getPostsByUser",
-    overrides: { from: address },
-  });
+ 
 
   useEffect(() => {
     setUsers(data);

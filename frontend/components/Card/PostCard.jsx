@@ -23,8 +23,7 @@ const PostCard = ({ id, content, created, owner }) => {
       axios.get(content).then((res) => {
         setPostData(res.data);
       });
-  }, []);
-  const handleLike = async () => {};
+  }, [primaryProfile]);
   const handleDisLike = async () => {};
   const handleCancelReaction = async () => {};
 
