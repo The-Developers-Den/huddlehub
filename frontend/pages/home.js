@@ -27,8 +27,6 @@ const Home = () => {
     isLoading && setLoader(true);
     if (data?.length > 0 && !primaryProfile) {
       const resp = data.find((user) => user.account === address);
-      console.log("hello in");
-      // console.log(resp);
       setPrimaryProfile(resp);
       console.log(primaryProfile);
     }

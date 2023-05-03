@@ -56,7 +56,7 @@ export const ProfileContextProvider = ({ children }) => {
         progress: undefined,
         theme: "dark",
       });
-      router.push("/connectwallet");
+      router.push("/");
     }
   }, [chain]);
 

@@ -19,7 +19,7 @@ const ProfileCard = () => {
 
   const handleClick = () => {
     disconnect();
-    router.replace("/connectwallet");
+    router.replace("/");
   };
 
   return (
