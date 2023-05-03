@@ -30,7 +30,7 @@ const Home = () => {
       setPrimaryProfile(resp);
     }
     setUsers(data);
-  }, [data]);
+  }, [data, isLoading]);
   console.log(posts);
 
   return (
