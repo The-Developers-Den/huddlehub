@@ -11,7 +11,7 @@
 
 
 ### Description
-## The problem Huddlerrsolves
+## The problem Huddlerr solves
 Huddlerr is an FVM-based social media platform that uses Filecoin storage. It provides an interface through which users can post random items and organise meetings to discuss anything (discussion, random music discussion). On the platform, they can also create token-gated/members-only workshops. Overall, it completes the task of building the primitives of a web3 social graph on FVM, using Filecoin storage to save all posts and user metrics, and empowering people to communicate using the Huddle01 SDK.
 ### Preview
 
