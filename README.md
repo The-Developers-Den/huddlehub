@@ -20,10 +20,13 @@ Botanium, the cognitive powerhouse of web3, aims to empower users of all levels,
 
 
 https://www.loom.com/share/7cfebe5632c14d4f82939138acdc66f9
-Description
-Welcome to Botanium AI, where we've revolutionized the way users interact with the Botanix ecosystem. Our platform is built around three core components.
 
+### Description
+
+Welcome to Botanium AI, where we've revolutionized the way users interact with the Botanix ecosystem. Our platform is built around three core components.
 Account abstraction smart wallet
+
+
 ### Botanium AI
 
 Seamless transaction capabilities - to provide users with an intuitive and efficient experience.
